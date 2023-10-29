@@ -64,7 +64,7 @@ inserta(X,L1,L2):- select(X,L2,L1).
 /*Utilizando el predicado append, definir la relación sublista(L1,L2) que verifique si L1 es
 una sublista de L2*/
 
-
+sublista(L1,L2):- append( [_, L1, _], L2 ).
 
 %EX 10
 /*Definir la relación subconjunto(L1,L2) que verifique si L2 es un subconjunto de L1*/ 
@@ -91,6 +91,12 @@ X e Y*/
 maximo(X,Y,X):- X>=Y.
 maximo(X,Y,Y):- X<Y.
 
+%EX 12 
+%mcd mal
+
+mcd(X,X,X).
+mcd(X,Y,M):- X < Y, Y1 is Y-X, mcd(X,Y1,M).
+mcd(X,Y,M):- X > Y, mcd(Y,X,M).
 
 %EX 13
 /*Definir la relación longitud(L,N) que se verifique si N es la longitud de la lista L.*/

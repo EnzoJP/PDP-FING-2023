@@ -57,6 +57,32 @@ cribaEratostenes :: Int -> [Int]
 cribaEratostenes n = criba [2..n]
 
 
+--Teniendo en cuenta la definición de la función predefinida foldr, redefinir la suma y el producto
+
+
+--Producto
+producto' :: Num a => [a] -> a
+producto' xs = foldr (*) 1 xs
+
+--Suma
+suma' :: Num a => [a] -> a
+suma' xs = foldr (+) 0 xs
+
+-----Funciones de orden superior --------------
+
+mapcasero :: (a -> b) -> [a] -> [b]
+mapcasero f [] = []  
+mapcasero f (x:xs) = f x : mapcasero f xs
+
+filtercasero :: (a -> Bool) -> [a] -> [a]
+filtercasero f [] = [] -- Caso base: lista vacía, no hay elementos para filtrar.
+filtercasero f (x:xs)
+  | f x       = x : filtercasero f xs -- Agregar x a la lista si f x es True.
+  | otherwise = filtercasero f xs     -- No agregar x a la lista si f x es False.
+
+
+
+
 --repite funcion
 dosVeces :: (a->a)->a->a
 dosVeces f x = f (f x)
@@ -78,3 +104,40 @@ casos n
 
 fullWords :: Int -> [String]
 fullWords n = map casos (show n)
+
+--coincide los parentesis
+
+coincide :: String -> Int -> Bool
+coincide [] 0 = True
+coincide [] _ = False
+coincide (x:xs) cont
+    | x=='[' = coincide xs (cont + 1) 
+    | x=='(' = coincide xs (cont + 1)
+    | x=='{' = coincide xs (cont + 1)
+    | x=='}' = coincide xs (cont -1)
+    | x==']' = coincide xs (cont -1)
+    | x==')' = coincide xs (cont -1)
+    | otherwise = False
+    
+
+-- verificación ISBN-10 cont es 10 !
+verificacion1 :: String -> Bool
+verificacion1 s 
+    | mod (verificacion s 10) 11 == 0 = True
+    |otherwise = False
+
+verificacion :: String -> Int -> Int
+verificacion "" 0 = 0
+verificacion (x:xs) cont
+    | x=='0' = 0 * cont + (verificacion xs (cont - 1))
+    | x=='1' = 1 * cont + (verificacion xs (cont - 1))
+    | x=='2' = 2 * cont + (verificacion xs (cont - 1))
+    | x=='3' = 3 * cont + (verificacion xs (cont - 1))
+    | x=='4' = 4 * cont + (verificacion xs (cont - 1))
+    | x=='5' = 5 * cont + (verificacion xs (cont - 1))
+    | x=='6' = 6 * cont + (verificacion xs (cont - 1))
+    | x=='7' = 7 * cont + (verificacion xs (cont - 1))
+    | x=='8' = 8 * cont + (verificacion xs (cont - 1))
+    | x=='9' = 9 * cont + (verificacion xs (cont - 1))
+    | x=='-' = verificacion xs cont
+    | otherwise = -1

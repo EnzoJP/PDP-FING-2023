@@ -3,12 +3,19 @@
 cuando MRXs es la concatenación de varias rotaciones (al menos una) de Xs.*/
 
 
+/*
 permute([], []).
 permute([X|Rest], L) :-
     permute(Rest, L1),
     select(X, L, L1).
 
 %se puede resolver con permutation de prolog
+
+multirotAux1([],_).
+multirotAux1([H|T],MRL):- pertenece(H,MRL), multirot(T,MRL).
+multirot(L1, L2) :- ((   length(L2) mod length(L1)) = 0) , multirotAux1(L1,L2).
+
+*/
 
 %EX 2
 

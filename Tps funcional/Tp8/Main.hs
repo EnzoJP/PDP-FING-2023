@@ -166,6 +166,7 @@ dropPrecio :: [Pizza] -> [Pizza]
 dropPrecio  = takeWhile (\p -> precio p < 200)
 
 
+
 --------------------------Ejercicio 4---------------------------------
 --suma de una lsita
 sumasl :: [Int] -> Int
@@ -210,15 +211,25 @@ operador (x:xs) a = x a : operador xs a
 
 -- encuentra una sublista 
 
---findSL :: [[Int]] -> [Int] -> a
---findSL [] _ = -1
---findSl (x:xs) y
---    | x==y = n
---    | x/=y = (n+1) :  findSL xs y
+
+
+findSl :: [Int] -> [Int] -> Int
+findSl _ [] = -999999
+findSl (x:xs) (y:ys) 
+    |x /= y =  (findSl (x:xs) ys) +1
+    |x==y && (find2 (x:xs) (y:ys))==True = 0
+    |x==y && (find2 (x:xs) (y:ys))==False = (findSl (x:xs) ys) +1
+    
+
+find2 :: [Int] -> [Int] -> Bool
+find2 [] _ = True
+find2 (x:xs) [] = False
+find2 (x:xs) (y:ys) 
+  |x==y = find2 xs ys 
+  |x /= y = False
 
 
 
-
-
+  
 
 
