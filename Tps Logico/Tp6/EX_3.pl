@@ -149,7 +149,7 @@ listaA(N,[H|L]):- H=N , listaA(N,L).
 /*Definir la relación lista_de_números(N,M,L) (equivalente a numlist) que verifica si L es
 la lista de los números desde N hasta M, ambos inclusive*/
 
-lista_de_numeros(N,N,[X]):- X=N.
+lista_de_numeros(N,N,[X]):- X=N, !.
 lista_de_numeros(N,M,[X|L]):- X=N , Z is N+1, lista_de_numeros(Z,M,L).
 
 %EX 20

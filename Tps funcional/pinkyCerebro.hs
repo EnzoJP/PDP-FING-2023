@@ -23,3 +23,38 @@ superpoderes a
   |(ci a >100) && (especie a) == "raton" = Animal {ci = ci a, especie = especie a, capacidades = capacidades a ++ ["hablar"]}
   |(especie a == "elefante") = Animal {ci = ci a, especie = especie a, capacidades = capacidades a ++ ["no tenerle miedo a los ratones"]}
   |otherwise = Animal {ci = ci a, especie = especie a, capacidades = capacidades a}
+
+--3)
+
+antropomorfico :: Animal -> Bool
+antropomorfico a
+  |(((ci a) > 60) && (elem "hablar" (capacidades a))) = True
+  |otherwise = False
+
+--4)
+
+
+experimentoExitosoAux :: (Animal -> Bool) -> Animal -> Bool
+experimentoExitosoAux cond a = cond a
+
+experimentoExitoso :: (Animal -> Animal) -> (Animal -> Bool) -> Animal -> Bool
+experimentoExitoso expe cond a  = experimentoExitosoAux cond (expe a)
+
+--experimentoss :: [(Animal -> Animal)] -> (Animal -> Bool) -> Animal -> Bool
+--experimentoss [] cond a = True
+--experimentoss (x:xs) cond a 
+--  | (experimentoExitoso x cond a ==True) = experimentoss xs cond a
+--  | (experimentoExitoso x cond a ==False) = False
+
+------------------------------------------------
+--otra forma
+
+--type Transformacion = Animal -> Animal
+--type Transformacion2 = Animal -> Int -> Animal
+
+--data Experimento = Experimento {transformacion1 :: Transformacion, transformacion2 :: Transformacion2, transformacion3 :: Transformacion, criterioExito :: Animal -> Bool} deriving(Show)
+
+--experimentoRaton = Experimento {transformacion1 = pinkificar, transformacion2 = inteligenciaSuperior 10, transformacion3 = superpoderes, criterioExito = antropomorfico}
+
+--experimentoExitoso :: Experimento -> Animal -> Bool
+--experimentoExitoso 

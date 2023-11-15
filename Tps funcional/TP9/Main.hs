@@ -141,3 +141,38 @@ verificacion (x:xs) cont
     | x=='9' = 9 * cont + (verificacion xs (cont - 1))
     | x=='-' = verificacion xs cont
     | otherwise = -1
+
+data Planeta = Mercurio | Venus | Tierra | Marte | Jupiter | Saturno | Urano | Neptuno deriving( Eq)
+edad :: Float -> Planeta -> Float
+edad segundos planeta
+  | planeta == Mercurio = segundos / 0.2408467
+  | planeta == Venus = segundos / 0.61519726
+  | planeta == Tierra = segundos / 1.0
+  | planeta == Marte = segundos / 1.8808158
+  | planeta == Jupiter = segundos / 11.862615
+  | planeta == Saturno = segundos / 29.447498
+  | planeta == Urano = segundos / 84.016846
+  | planeta == Neptuno = segundos / 164.79132
+
+
+--contarPalabras :: String -> [(String, Int)]
+--contarPalabras frase = contAux (map toLower (words frase)) (map toLower (words frase))
+
+--contAux :: [String] -> [String] -> [(String, Int)]
+--contAux [] l  = []
+--contAux (x:xs) l  = contAux xs ++ [(x,contarApariciones x l)]
+
+--contarApariciones :: String -> [String] -> Int
+--contarApariciones palabra [] = 0
+--contarApariciones palabra (x:xs)
+--  | palabra==x = contarApariciones palabra xs +1
+--  | otherwise contarApariciones palabra xs
+
+
+
+data Planetas = Tierra { color :: String } | Marte { color :: String }
+
+-- Función para imprimir el color de un planeta
+imprimirColor :: Planetas -> String
+imprimirColor (Tierra colorTierra) = "La Tierra es de color " ++ colorTierra
+imprimirColor (Marte colorMarte) = "Marte es de color " ++ colorMarte
